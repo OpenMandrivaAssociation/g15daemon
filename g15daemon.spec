@@ -11,6 +11,8 @@ Group:                  System/Servers
 URL:                    http://g15daemon.sourceforge.net/
 Source0:                http://downloads.sourceforge.net/g15daemon-%{version}.tar.bz2
 Source1:                g15daemon.init
+Requires(post):         rpm-helper
+Requires(preun):        rpm-helper
 BuildRequires:          g15-devel
 BuildRequires:          g15render-devel
 BuildRoot:              %{_tmppath}/%{name}-%{version}-%{release}-root
