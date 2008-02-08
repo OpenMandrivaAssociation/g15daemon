@@ -28,6 +28,7 @@ apps at the press of a button.
 %package -n %{libname}
 Summary:        Daemon to control logitech G15 keyboards
 Group:          System/Libraries
+Provides:       g15daemon_client = %{version}-%{release}
 
 %description -n %{libname}
 G15daemon controls the G15 keyboard, allowing the use of
@@ -41,6 +42,7 @@ apps at the press of a button.
 Summary:        Daemon to control logitech G15 keyboards
 Group:          Development/C
 Provides:       g15daemon_client-devel = %{version}-%{release}
+Requires:       g15daemon_client = %{version}-%{release}
 
 %description -n %{libname_devel}
 G15daemon controls the G15 keyboard, allowing the use of
@@ -54,6 +56,7 @@ apps at the press of a button.
 Summary:        Daemon to control logitech G15 keyboards
 Group:          Development/C
 Provides:       g15daemon_client-static-devel = %{version}-%{release}
+Requires:       g15daemon_client-devel = %{version}-%{release}
 
 %description -n %{libname_static_devel}
 G15daemon controls the G15 keyboard, allowing the use of
