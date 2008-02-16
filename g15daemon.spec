@@ -3,7 +3,7 @@
 %define libname_static_devel %mklibname g15daemon_client -d -s
 
 Name:                   g15daemon
-Version:                1.9.5.2
+Version:                1.9.5.3
 Release:                %mkrel 1
 Summary:                Daemon to control logitech G15 keyboards
 License:                GPL
