@@ -4,7 +4,7 @@
 
 Name:                   g15daemon
 Version:                1.9.5.3
-Release:                %mkrel 1
+Release:                %mkrel 3
 Summary:                Daemon to control logitech G15 keyboards
 License:                GPL
 Group:                  System/Servers
