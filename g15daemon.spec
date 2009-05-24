@@ -4,13 +4,14 @@
 
 Name:                   g15daemon
 Version:                1.9.5.3
-Release:                %mkrel 3
+Release:                %mkrel 4
 Summary:                Daemon to control logitech G15 keyboards
-License:                GPL
+License:                GPLv2+
 Group:                  System/Servers
 URL:                    http://g15daemon.sourceforge.net/
 Source0:                http://downloads.sourceforge.net/g15daemon/g15daemon-%{version}.tar.bz2
 Source1:                g15daemon.init
+Patch0:			%{name}-1.9.5.3-fix-open-with-O_CREAT.patch
 Requires(post):         rpm-helper
 Requires(preun):        rpm-helper
 BuildRequires:          g15-devel
@@ -68,6 +69,7 @@ apps at the press of a button.
 
 %prep
 %setup -q
+%patch0 -p1 -b .ocreat
 
 %build
 %{configure2_5x}
