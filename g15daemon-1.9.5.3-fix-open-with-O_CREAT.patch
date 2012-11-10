@@ -1,0 +1,12 @@
+diff -p -up g15daemon-1.9.5.3/g15daemon/utility_funcs.c.ocreat g15daemon-1.9.5.3/g15daemon/utility_funcs.c
+--- g15daemon-1.9.5.3/g15daemon/utility_funcs.c.ocreat	2008-01-26 06:02:07.000000000 +0100
++++ g15daemon-1.9.5.3/g15daemon/utility_funcs.c	2009-05-24 03:10:59.000000000 +0200
+@@ -356,7 +356,7 @@ int uf_conf_write(g15daemon_t *list,char
+     config_items_t * item=NULL;
+     char line[1024];
+     
+-    config_fd = open(filename,O_CREAT|O_RDWR|O_TRUNC);
++    config_fd = open(filename,O_CREAT|O_RDWR|O_TRUNC,S_IRUSR|S_IWUSR);
+     if(config_fd){
+     snprintf(line,1024,"# G15Daemon Configuration File\n# any items entered before a [section] header\n# will be in the Global config space\n# comments you wish to keep should start with a semicolon';'\n");
+     write(config_fd,line,strlen(line));
