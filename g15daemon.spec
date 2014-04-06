@@ -59,11 +59,8 @@ apps at the press of a button.
 %patch1 -p1
 
 %build
-LDFLAGS=' -Wl,--as-needed -Wl,--no-undefined \
-	-Wl,-z,relro -Wl,-O1 -Wl,--build-id -Wl,--enable-new-dtags -Wl,--hash-style=gnu'
-export LDFLAGS
-
-%configure --disable-static
+autoreconf -fi
+%configure2_5x --disable-static
 make
 
 %install
