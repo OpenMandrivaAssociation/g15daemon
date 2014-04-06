@@ -13,9 +13,11 @@ Source1:                g15daemon.init
 Patch0:                 %{name}-1.9.5.3-fix-open-with-O_CREAT.patch
 Patch1:			g15daemon-1.9.5.3-recv-oob-answer.patch  
 
-
 BuildRequires:          g15-devel
 BuildRequires:          g15render-devel
+
+Requires(post):     rpm-helper
+Requires(preun):    rpm-helper
 
 %description
 G15daemon controls the G15 keyboard, allowing the use of 
@@ -44,6 +46,8 @@ Summary:        Daemon to control logitech G15 keyboards
 Group:          Development/C
 Provides:       g15daemon_client-devel = %{EVRD}
 Requires:       g15daemon_client = %{version}
+# just to have a happy linting..
+Requires:       %{libname} = %{EVRD}
 
 %description -n %{libname_devel}
 G15daemon controls the G15 keyboard, allowing the use of
