@@ -1,0 +1,10 @@
+[Unit]
+Description=Provides access to extra keys and the LCD available on the logitech G15 keyboard
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/g15daemon
+PIDFile=/var/run/g15daemon.pid
+
+[Install]
+WantedBy=multi-user.target  

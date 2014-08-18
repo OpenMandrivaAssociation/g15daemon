@@ -1,21 +1,23 @@
-%define major 1
-%define libname %mklibname g15daemon_client %{major}
+%define libname %mklibname g15daemon_client 1
 %define libname_devel %mklibname g15daemon_client -d
 
-Name:		g15daemon
-Version:	1.9.5.3
-Release:	9
-Summary:	Daemon to control logitech G15 keyboards
-License:	GPLv2+
-Group:		System/Servers
-URL:		http://g15daemon.sourceforge.net/
-Source0:	http://downloads.sourceforge.net/g15daemon/g15daemon-%{version}.tar.bz2
-Source1:	g15daemon.init
-Patch0:		%{name}-1.9.5.3-fix-open-with-O_CREAT.patch
-Requires(post):	rpm-helper
-Requires(preun):	rpm-helper
-BuildRequires:		g15-devel
-BuildRequires:		g15render-devel
+Name:                   g15daemon
+Version:                1.9.5.3
+Release:                10
+Summary:                Daemon to control logitech G15 keyboards
+License:                GPLv2+
+Group:                  System/Servers
+URL:                    http://g15daemon.sourceforge.net/
+Source0:                http://downloads.sourceforge.net/g15daemon/g15daemon-%{version}.tar.bz2
+Source1:                g15daemon.service
+Patch0:                 %{name}-1.9.5.3-fix-open-with-O_CREAT.patch
+Requires(post):         rpm-helper
+Requires(preun):        rpm-helper
+BuildRequires:          g15-devel
+BuildRequires:          g15render-devel
+Requires(post): 	systemd-units
+Requires(preun): 	systemd-units
+Requires(postun): 	systemd-units
 
 %description
 G15daemon controls the G15 keyboard, allowing the use of 
@@ -26,10 +28,10 @@ and gives the user the ability to switch between client
 apps at the press of a button.
 
 %package -n %{libname}
-Summary:		Daemon to control logitech G15 keyboards
-Group:			System/Libraries
-Provides:		g15daemon_client = %{EVRD}
-Requires:		%{name} >= %{version}
+Summary:        Daemon to control logitech G15 keyboards
+Group:          System/Libraries
+Provides:       g15daemon_client = %{EVRD}
+Requires:       %{name} >= %{version}
 
 %description -n %{libname}
 G15daemon controls the G15 keyboard, allowing the use of
@@ -40,10 +42,10 @@ and gives the user the ability to switch between client
 apps at the press of a button.
 
 %package -n %{libname_devel}
-Summary:		Daemon to control logitech G15 keyboards
-Group:			Development/C
-Provides:		g15daemon_client-devel = %{EVRD}
-Requires:		g15daemon_client = %{version}
+Summary:        Daemon to control logitech G15 keyboards
+Group:          Development/C
+Provides:       g15daemon_client-devel = %{EVRD}
+Requires:       g15daemon_client = %{version}
 
 %description -n %{libname_devel}
 G15daemon controls the G15 keyboard, allowing the use of
@@ -62,32 +64,46 @@ apps at the press of a button.
 %make
 
 %install
-%{makeinstall_std}
+%makeinstall_std
 rm -r %{buildroot}%{_docdir}
-mkdir -p %{buildroot}%{_initrddir}
-cp -a %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
+
+install -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/g15daemon.service
 
 %post
-%_post_service %{name}
+if [ $1 -eq 1 ] ; then 
+    # Initial installation 
+    /bin/systemctl daemon-reload >/dev/null 2>&1 || :
+fi
 
 %preun
-%_preun_service %{name}
+if [ $1 -eq 0 ] ; then
+    # Package removal, not upgrade
+    /bin/systemctl --no-reload disable g15daemon.service > /dev/null 2>&1 || :
+    /bin/systemctl stop g15daemon.service > /dev/null 2>&1 || :
+fi
+
+%postun
+/bin/systemctl daemon-reload >/dev/null 2>&1 || :
+if [ $1 -ge 1 ] ; then
+    # Package upgrade, not uninstall
+    /bin/systemctl try-restart g15daemon.service >/dev/null 2>&1 || :
+fi
 
 %files 
+%defattr(0644,root,root,0755)
 %doc AUTHORS ChangeLog COPYING Documentation/README* FAQ INSTALL LICENSE NEWS README* TODO contrib lang-bindings 
 %defattr(-,root,root,0755)
 %{_datadir}/g15daemon
-%attr(0755,root,root) %{_initrddir}/%{name}
+%{_unitdir}/g15daemon.service
 %{_libdir}/g15daemon
 %{_mandir}/man1/*
 %{_sbindir}/g15daemon
 
 %files -n %{libname}
-%{_libdir}/*.so.%{major}*
+%{_libdir}/*.so.*
 
 %files -n %{libname_devel}
+%defattr(-,root,root,0755)
 %{_includedir}/*
 %{_libdir}/*.so
 %{_mandir}/man3/*
-
-
