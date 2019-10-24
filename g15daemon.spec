@@ -60,11 +60,11 @@ apps at the press of a button.
 %patch0 -p1 -b .ocreat
 
 %build
-%configure2_5x --disable-static
-%make
+%configure --disable-static
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 rm -r %{buildroot}%{_docdir}
 
 install -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/g15daemon.service
