@@ -1,4 +1,5 @@
 %define _disable_lto 1
+%define _disable_ld_no_undefined 1
 
 %define libname %mklibname g15daemon_client 1
 %define libname_devel %mklibname g15daemon_client -d
