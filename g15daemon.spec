@@ -64,10 +64,12 @@ apps at the press of a button.
 #patch0 -p1 -b .ocreat
 
 %build
-%global optflags %{optflags} -fno-common
+CFLAGS
+%global CFLAGS %{optflags} -fno-common
+#global optflags %{optflags} -fno-common
 #%global ldflags %{ldflags} -fuse-ld=gold
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 %configure --disable-static
 %make_build
 
