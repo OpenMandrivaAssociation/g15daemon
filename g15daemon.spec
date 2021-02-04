@@ -65,6 +65,8 @@ apps at the press of a button.
 
 %build
 %global ldflags %{ldflags} -fuse-ld=bfd
+export CC=gcc
+export CXX=g++
 %configure --disable-static
 %make_build
 
