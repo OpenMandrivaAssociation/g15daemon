@@ -65,7 +65,7 @@ apps at the press of a button.
 
 %build
 CFLAGS
-%global CFLAGS %{optflags} -fno-common
+export CFLAGS="-fno-common"
 #global optflags %{optflags} -fno-common
 #%global ldflags %{ldflags} -fuse-ld=gold
 #export CC=gcc
