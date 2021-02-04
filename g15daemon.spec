@@ -64,7 +64,7 @@ apps at the press of a button.
 #patch0 -p1 -b .ocreat
 
 %build
-%global ldflags %{ldflags} -fuse-ld=gold
+%global ldflags %{ldflags} -fuse-ld=bfd
 %configure --disable-static
 %make_build
 
