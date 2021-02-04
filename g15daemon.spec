@@ -14,7 +14,7 @@ URL:                    http://g15daemon.sourceforge.net/
 #Source0:                http://downloads.sourceforge.net/g15daemon/g15daemon-%{version}.tar.bz2
 Source0:                https://gitlab.com/menelkir/g15daemon/-/archive/v%{version}/g15daemon-v%{version}.tar.bz2
 Source1:                g15daemon.service
-Patch0:                 %{name}-1.9.5.3-fix-open-with-O_CREAT.patch
+#Patch0:                 %{name}-1.9.5.3-fix-open-with-O_CREAT.patch
 Requires(post):         rpm-helper
 Requires(preun):        rpm-helper
 BuildRequires:          g15-devel
@@ -61,7 +61,7 @@ apps at the press of a button.
 
 %prep
 %setup -q -n %{name}-v%{version}
-%patch0 -p1 -b .ocreat
+#patch0 -p1 -b .ocreat
 
 %build
 %configure --disable-static
