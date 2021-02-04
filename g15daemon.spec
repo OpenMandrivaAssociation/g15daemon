@@ -60,7 +60,7 @@ and gives the user the ability to switch between client
 apps at the press of a button.
 
 %prep
-%setup -q
+%setup -q -n %{name}-v%{version}
 %patch0 -p1 -b .ocreat
 
 %build
