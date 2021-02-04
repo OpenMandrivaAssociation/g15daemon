@@ -64,8 +64,8 @@ apps at the press of a button.
 #patch0 -p1 -b .ocreat
 
 %build
-#CFLAGS
-export CFLAGS="-fno-common"
+%{build_ldflags} -fno-common
+#export CFLAGS="-fno-common"
 #global optflags %{optflags} -fno-common
 #%global ldflags %{ldflags} -fuse-ld=gold
 #export CC=gcc
