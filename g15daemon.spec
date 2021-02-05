@@ -65,6 +65,7 @@ apps at the press of a button.
 #patch0 -p1 -b .ocreat
 
 %build
+%set_build_flags
 %global ldflags %{ldflags} -fno-common
 export CFLAGS="%{optflags} -fno-common"
 export CXXFLAGS="%{optflags} -fno-common"
