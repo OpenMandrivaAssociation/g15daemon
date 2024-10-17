@@ -10,7 +10,7 @@ Release:                13
 Summary:                Daemon to control logitech G15 keyboards
 License:                GPLv2+
 Group:                  System/Servers
-URL:                    http://g15daemon.sourceforge.net/
+URL:                    https://g15daemon.sourceforge.net/
 Source0:                http://downloads.sourceforge.net/g15daemon/g15daemon-%{version}.tar.bz2
 Source1:                g15daemon.service
 Patch0:                 %{name}-1.9.5.3-fix-open-with-O_CREAT.patch
