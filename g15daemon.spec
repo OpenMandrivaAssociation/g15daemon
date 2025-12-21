@@ -16,6 +16,11 @@ Source1:                g15daemon.service
 Patch0:                 %{name}-1.9.5.3-fix-open-with-O_CREAT.patch
 Requires(post):         rpm-helper
 Requires(preun):        rpm-helper
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:          g15-devel
 BuildRequires:          g15render-devel
 Requires(post): 	systemd-units
